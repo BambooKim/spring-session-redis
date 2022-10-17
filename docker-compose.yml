@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: example
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: bamboo
+      MYSQL_PASSWORD: bamboo
+    platform: linux/x86_64
+  redis:
+    image: redis:alpine
+    command: redis-server --port 6379
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    ports:
+      - "6381:6379"
